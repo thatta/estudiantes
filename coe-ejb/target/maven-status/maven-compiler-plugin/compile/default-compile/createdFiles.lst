@@ -1,0 +1,13 @@
+com\mycompany\bean\EstudianteFacade.class
+com\mycompany\bean\InfoFacade.class
+com\mycompany\interfaces\ClaseFacadeLocal.class
+com\mycompany\bean\ClaseFacade.class
+com\mycompany\entity\Clase.class
+com\mycompany\entity\Estudiante.class
+com\mycompany\entity\Estudiante_.class
+com\mycompany\entity\Info_.class
+com\mycompany\entity\Clase_.class
+com\mycompany\interfaces\EstudianteFacadeLocal.class
+com\mycompany\interfaces\InfoFacadeLocal.class
+com\mycompany\entity\Info.class
+com\mycompany\bean\AbstractFacade.class

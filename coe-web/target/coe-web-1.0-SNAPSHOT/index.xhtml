@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+
+            <center>
+                <h2>REGISTRO ESTUDIANTE</h2>
+
+                <p:growl id="msgs" showDetail="true"/>
+
+                <p:messages id="messages" />
+                <h:panelGrid columns="3" cellpadding="10" id="estudiante">
+
+                    <p:outputLabel for="nombre" value="Nombre:" />
+                    <p:inputText id="nombre" value="#{index.nombre}"  required="true" >
+                        <f:validateRegex pattern="^[a-zA-Z]+$" />
+                    </p:inputText>
+                    <p:message for="nombre" />
+
+
+                    <p:outputLabel for="cedula" value="Cedula:" />
+                    <p:inputText id="cedula" value="#{index.cedula}"  required="true" >
+
+                    </p:inputText>
+                    <p:message for="cedula" />
+
+
+                    <h:column/>
+                    <p:commandButton icon="ui-icon-key" value="Registrar" update=":form, :form2" action="#{index.crearEstudiante()}" style="margin-right:20px;" />
+                </h:panelGrid>
+                <p:separator/>
+
+
+            </center>
+
+
+
+
+        </h:form>
+
+
+        <h:form id="form1">
+
+            <center>
+                <h2>REGISTRO CLASE</h2>
+
+                <p:growl id="msgs1" showDetail="true"/>
+
+                <p:messages id="messages1" />
+                <h:panelGrid columns="3" cellpadding="10">
+
+                    <p:outputLabel for="nombre" value="Nombre:" />
+                    <p:inputText id="nombre" value="#{index.nombre}"  required="true" >
+
+                    </p:inputText>
+                    <p:message for="nombre" />
+
+
+                    <p:outputLabel for="duracion" value="Duracion:" />
+                    <p:inputText id="duracion" value="#{index.duracion}"  required="true" >
+
+                    </p:inputText>
+                    <p:message for="duracion" />
+
+
+                    <h:column/>
+                    <p:commandButton icon="ui-icon-key" value="Registrar" update=":form:msgs  " action="#{index.crearClase()}" style="margin-right:20px;" />
+                </h:panelGrid>
+                <p:separator/>
+
+
+            </center>
+
+        </h:form>
+        
+        
+
+        <h:form id="form2">
+            <h2>RELACION ESTUDIANTE CLASE</h2>
+            <p:growl id="msgs" showDetail="true" />
+
+            <p:panel header="Relacionar" style="margin-bottom:10px;">
+                <h:panelGrid columns="2" cellpadding="5">
+
+
+                    <p:outputLabel for="estudiantes" value="Estudiantes: " />
+                    <p:selectOneMenu id="estudiantes" value="#{index.estudianteSeleccionado}" style="width:150px">
+
+                        <f:selectItem itemLabel="Selecciona uno" itemValue=""  />
+                        <f:selectItems value="#{index.lista}" var="estudiante" itemLabel="#{estudiante.nombre}" itemValue="#{estudiante.id}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="clases" value="Clases: " />
+                    <p:selectOneMenu id="clases" value="#{index.claseSeleccionada}" valueChangeListener="#{index.buscarEstudiante}" style="width:150px">
+                        <f:selectItem itemLabel="Selecciona uno" itemValue=""  />
+                        <f:selectItems value="#{index.listaC}" var="clase" itemLabel="#{clase.nombre}" itemValue="#{clase.id}" />
+                        <p:ajax update=":form2:estudiantes, :listaEstudiante:estudi">
+
+                        </p:ajax>
+
+                    </p:selectOneMenu>
+                </h:panelGrid>
+
+                <p:separator />
+
+                <p:commandButton value="GUARDAR" update="msgs" action="#{index.relacion()}" icon="pi pi-check" />
+            </p:panel>
+        </h:form>
+
+        <h:form id="listaEstudiante" >
+            <center>
+            <h2>ESTUDIANTES EN LA CLASE</h2>
+            <p:dataTable id="estudi" var="estud" value="#{index.listaEstudianteSi}" >
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{estud.nombre}" />
+                </p:column>
+
+                <p:column headerText="Cedula">
+                    <h:outputText value="#{estud.cedula}" />
+                </p:column>
+
+                
+            </p:dataTable>
+            </center>
+        </h:form>
+
+
+
+    </h:body>
+</html>
+
